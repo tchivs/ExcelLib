@@ -329,8 +329,7 @@ namespace ExcelLib
         /// <summary>
         /// 主要实现这个方法
         /// </summary>
-        /// <param name="path">要打开的文件路径</param>
-        public abstract void Handler(string path = null);
+        public abstract void Handler();
 
         /// <summary>
         /// 批量插入图片
