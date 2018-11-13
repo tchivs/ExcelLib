@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelLib", "ExcelLib\ExcelLib.csproj", "{DBEE7006-1957-4E4A-B3B0-DA491619CFE6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBEE7006-1957-4E4A-B3B0-DA491619CFE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBEE7006-1957-4E4A-B3B0-DA491619CFE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBEE7006-1957-4E4A-B3B0-DA491619CFE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBEE7006-1957-4E4A-B3B0-DA491619CFE6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4FEDE287-4B16-442C-927F-06D55100DD7E}
+	EndGlobalSection
+EndGlobal
