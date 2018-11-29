@@ -174,6 +174,10 @@ namespace ExcelLib
             {
                 for (int i = 0; i < sourceRows.Length; i++)
                 {
+                    if (string.IsNullOrEmpty(sourceRows[i]))
+                    {
+                        continue;
+                    }
                     string rg = sourceRows[i] + sourceStart + ":" + sourceRows[i] + intrngEnd;
                     sourceWorksheet.Range[rg]
                         .Copy(newWorksheet.Range[newRows[i] + newStart]);
@@ -399,20 +403,40 @@ namespace ExcelLib
             string pathFull = filename;
             string fileName;
             string path = Path.GetDirectoryName(filename);
-            if (!Exists(pathFull))
+            try
             {
-                pathFull = Directory.GetFiles(path ?? throw new InvalidOperationException(), filename)[0];
-                fileName = Path.GetFileName(pathFull);
+                if (!Exists(pathFull))
+                {
+                    pathFull = Directory.GetFiles(path ?? throw new InvalidOperationException(), filename)[0];
+                    fileName = Path.GetFileName(pathFull);
+                }
+                else
+                {
+                    fileName = Path.GetFileName(filename);
+                }
             }
-            else
+            catch (System.ArgumentException  except)
             {
-                fileName = Path.GetFileName(filename);
+                Workbook request = null;
+                //遍历所有已打开的工作簿
+                foreach (Workbook ws in ExcelApp.Workbooks)
+                {
+                    Debug.WriteLine(ws.Name);
+
+                    if (ws.Name != filename) continue;
+                    request = GetWorkbook(filename); //OpenFromFile(umts_path).Worksheets[1];
+                    break;
+                }
+                return request;
             }
+
+
 
             Workbook res = null;
             //遍历所有已打开的工作簿
             foreach (Workbook ws in ExcelApp.Workbooks)
             {
+               
                 if (ws.Name != fileName) continue;
                 res = GetWorkbook(fileName); //OpenFromFile(umts_path).Worksheets[1];
                 break;
@@ -439,7 +463,7 @@ namespace ExcelLib
         /// <param name="sheet">要进行替换的Sheet</param>
         /// <param name="oldstr">要进行替换的字符串</param>
         /// <param name="newstr">新的字符串</param>
-        public void Replace(Worksheet sheet, string oldstr, string newstr)
+        public virtual void Replace(Worksheet sheet, string oldstr, string newstr)
         {
             sheet.UsedRange.Replace(oldstr, newstr, XlLookAt.xlPart, XlSearchOrder.xlByRows);
         }
@@ -450,7 +474,7 @@ namespace ExcelLib
         /// <param name="sheet">要进行替换的Sheets</param>
         /// <param name="oldstr">要进行替换的字符串</param>
         /// <param name="newstr">新的字符串</param>
-        public void Replace(Workbook workbook, string oldstr, string newstr)
+        public virtual void Replace(Workbook workbook, string oldstr, string newstr)
         {
             Sheets sheets = workbook.Worksheets;
             foreach (Worksheet sheet in sheets)
